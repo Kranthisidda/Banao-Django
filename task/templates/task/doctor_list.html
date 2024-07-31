@@ -1,0 +1,14 @@
+
+
+{% block content %}
+<h2>Doctors</h2>
+<ul>
+    {% for doctor in doctors %}
+        <li>
+            <img src="{{ doctor.profile.profile_picture.url }}" alt="{{ doctor.username }}" style="width:100px;height:100px;">
+            <p>{{ doctor.username }}</p>
+            <a href="{% url 'book_appointment' doctor.id %}">Book Appointment</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

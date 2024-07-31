@@ -1,0 +1,40 @@
+
+
+{% block content %}
+  <h2>Blog Posts</h2>
+  {% for category, posts in categorized_posts.items %}
+    <h3>{{ category }}</h3>
+    <ul  type="none">
+      {% for post in posts %}
+      <div style="text-align: center;">
+        <li>
+          <h4>{{ post.title }}</h4>
+          <h3>Author:{{ post.author }}</h3>
+          <img src="{{ post.image.url }}" alt="{{ post.title }}" height="200px" width="200px" >
+          <p>{{ post.summary|truncatewords:15 }}...</p>
+          <a href="#" onclick="toggleContent('content-{{ post.id }}'); return false;">View Content</a>
+          <div id="content-{{ post.id }}" style="display:none;">
+            <p>{{ post.content }}</p>
+          </div>
+          
+        </li>
+      </div>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+  <form action="{% url 'patient_dashboard' %}">
+    {% csrf_token %}
+    <input type="submit" value="Home" style="height: 30px;width: 60px; margin-left: 750;">
+  </form>
+  
+  <script>
+    function toggleContent(contentId) {
+        var contentDiv = document.getElementById(contentId);
+        if (contentDiv.style.display === "none") {
+            contentDiv.style.display = "block";
+        } else {
+            contentDiv.style.display = "none";
+        }
+    }
+  </script>
+{% endblock %}

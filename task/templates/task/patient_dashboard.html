@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Dashboard</title>
+</head>
+<body>
+    <h2>Patient Dashboard</h2>
+    {% if request.user.profile.profile_picture %}
+    <img src="{{ request.user.profile.profile_picture.url }}" alt="Profile Picture" height="100px" width="100px">
+{% else %}
+    <p>No profile picture uploaded.</p>
+{% endif %}
+    <p>Welcome, {{ request.user.username }}!</p>
+    <p>Email: {{ request.user.email }}</p>
+    <p>First Name: {{ request.user.first_name }}</p>
+    <p>Last Name: {{ request.user.last_name }}</p>
+   
+    <p>Address: {{ request.user.profile.address_line1 }}, {{ request.user.profile.address_city }}, {{ request.user.profile.address_state }}, {{ request.user.profile.address_pincode }}</p>
+    
+</body>
+</html>
